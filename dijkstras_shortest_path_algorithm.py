@@ -1,6 +1,11 @@
+# Counts how many steps it takes to go from one node to another.
+# Doesn't show the path so you will have to extract it from the Dijkstra's
+# adjacency matrix.
+
 # This function keeps track of which vertexes have been selected 
 # already. selected_indexes_array1 is an array of the indexes of 
 # selected vertexes.
+
 
 def selected_vertex_index(selected_vertex_index, selected_indexes_array1):
     selected_indexes_array1.append(selected_vertex_index)
@@ -10,6 +15,7 @@ def selected_vertex_index(selected_vertex_index, selected_indexes_array1):
 # array1 contains each node and for all nodes, a path matrix is 
 # generated that tells which other nodes can be accessed to from a given 
 # node. For array1[i], all possible directions are given by paths[i]
+
 
 def path_matrix(from2, to2, array1, length1):
     list1 = from2 + to2
@@ -55,6 +61,7 @@ def path_matrix(from2, to2, array1, length1):
 # to1 = [1,2,3,3], 0 is connected to 1 and 2, 1 is connected to
 # 3, 2 is connected to 3. Locationa is the starting point and
 # locationb is the destination.
+
 
 def fastestroute(from1, to1, locationa, locationb):
     
@@ -102,7 +109,7 @@ def fastestroute(from1, to1, locationa, locationb):
             dijkstra2 = [ [ INFINITY for i in range(v_column) ] for j in \
                           range(1) ] 
             dijkstra = dijkstra + dijkstra2
-            dijkstra[row][:] = dijkstra[row-1][:]
+            dijkstra[row][:] = dijkstra[row - 1][:]
             
             # Assigns values (in the new row in the Adjacency Matrix)
             # to each vertex from previously selected vertex
@@ -112,10 +119,10 @@ def fastestroute(from1, to1, locationa, locationb):
                 cond3_1 = path[idx][i] >= 0
                 if cond3_1:
                     idx2 = array.index(path[idx][i])
-                    cond3 = dijkstra[row-1][idx2] > dijkstra[row-1][idx] + 1
+                    cond3 = dijkstra[row - 1][idx2] > dijkstra[row - 1][idx] + 1
                     cond4 = array[idx2] == locationb
                     if cond3:
-                        dijkstra[row][idx2] = dijkstra[row-1][idx] + 1
+                        dijkstra[row][idx2] = dijkstra[row - 1][idx] + 1
                     if cond4:
                         i = N1 + 1
                         row = -2 
@@ -185,7 +192,13 @@ def fastestroute(from1, to1, locationa, locationb):
 
     return steps
 
+
+# Main function, this is an example.
+# Means that the connections are 0<->1,0<->2,1<->3,2<->3,
+# and starting point is 2, ending point is 3
 def main():
-    step=fastestroute([0,0,1,2],[1,2,3,3],2,3)
+    step = fastestroute([0, 0, 1, 2], [1, 2, 3, 3], 2, 3)
     print(step)
+
+
 main()
